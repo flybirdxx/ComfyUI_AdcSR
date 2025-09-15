@@ -2,6 +2,10 @@
 
 基于 [AdcSR (Adversarial Diffusion Compression for Real-World Image Super-Resolution)](https://huggingface.co/Guaishou74851/AdcSR) 的 ComfyUI 自定义节点实现。
 
+```
+当前实现对分辨率小的图片有奇效,在我本地5060TI的机器上处理超过640的图片就会爆显存,使用分块又会有很明显的接缝和色块,暂时只能这样了,因为我本人不懂代码,没有能力优化,如果有哪位大佬感兴趣,欢迎PR
+```
+
 ## 下载安装
 
 ### 方法一：Git 克隆（推荐）

@@ -2,6 +2,10 @@
 
 A ComfyUI custom node implementation based on [AdcSR (Adversarial Diffusion Compression for Real-World Image Super-Resolution)](https://huggingface.co/Guaishou74851/AdcSR).
 
+```
+Currently, this solution works exceptionally well for low-resolution images. On my local machine with a 5060TI GPU, processing images exceeding 640 pixels causes memory overflow. Using tiling introduces noticeable seams and color blocks. For now, this is the best I can do since I lack coding skills to optimize it. If any experts are interested, feel free to submit a pull request.
+```
+
 ## Download & Installation
 
 ### Method 1: Git Clone (Recommended)
