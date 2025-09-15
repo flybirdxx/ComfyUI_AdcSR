@@ -1,37 +1,37 @@
-# AdcSR ComfyUI 节点
+# AdcSR ComfyUI Node
 
-基于 [AdcSR (Adversarial Diffusion Compression for Real-World Image Super-Resolution)](https://huggingface.co/Guaishou74851/AdcSR) 的 ComfyUI 自定义节点实现。
+A ComfyUI custom node implementation based on [AdcSR (Adversarial Diffusion Compression for Real-World Image Super-Resolution)](https://huggingface.co/Guaishou74851/AdcSR).
 
-## 下载安装
+## Download & Installation
 
-### 方法一：Git 克隆（推荐）
+### Method 1: Git Clone (Recommended)
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/flybirdxx/ComfyUI_AdcSR.git
 ```
 
-### 方法二：手动下载
-1. 访问 [项目页面](https://github.com/flybirdxx/ComfyUI_AdcSR)
-2. 点击 "Code" → "Download ZIP"
-3. 解压到 `ComfyUI/custom_nodes/` 目录
-4. 重命名文件夹为 `ComfyUI_AdcSR`
+### Method 2: Manual Download
+1. Visit the [project page](https://github.com/flybirdxx/ComfyUI_AdcSR)
+2. Click "Code" → "Download ZIP"
+3. Extract to `ComfyUI/custom_nodes/` directory
+4. Rename the folder to `ComfyUI_AdcSR`
 
-## 功能特点
+## Features
 
-- **自动模型检测**: 自动检测本地模型文件
-- **智能下载**: 缺失模型时自动从 Hugging Face 下载
-- **高效处理**: 支持图像超分辨率处理
-- **内存优化**: 针对大图像进行内存优化
+- **Automatic Model Detection**: Automatically detects local model files
+- **Smart Download**: Automatically downloads missing models from Hugging Face
+- **Efficient Processing**: Supports image super-resolution processing
+- **Memory Optimization**: Memory optimization for large images
 
-## 所需下载的模型
+## Required Models to Download
 
 ```
 models/
-    ├── adcsr/                          # AdcSR 模型目录
-    │   ├── net_params_200.pkl         # AdcSR 主模型 (1.7GB)
-    │   └── halfDecoder.ckpt           # AdcSR 半解码器 (360MB)
-    └── diffusers/                     # Diffusers 模型目录
-        └── stable-diffusion-2-1-base/ # SD2.1 Base 模型 (5GB)
+    ├── adcsr/                          # AdcSR model directory
+    │   ├── net_params_200.pkl         # AdcSR main model (1.7GB)
+    │   └── halfDecoder.ckpt           # AdcSR half decoder (360MB)
+    └── diffusers/                     # Diffusers model directory
+        └── stable-diffusion-2-1-base/ # SD2.1 Base model (5GB)
             ├── model_index.json
             ├── unet/
             │   ├── config.json
@@ -50,62 +50,62 @@ models/
                 └── scheduler_config.json
 ```
 
-## 自动下载
+## Automatic Download
 
-当首次使用节点时，系统会自动检测缺失的模型并下载：
+When using the node for the first time, the system will automatically detect missing models and download them:
 
-1. **AdcSR 模型**: 下载到 `ComfyUI/models/adcsr/`
-2. **SD2.1 模型**: 下载到 `ComfyUI/models/diffusers/stable-diffusion-2-1-base/`
+1. **AdcSR Model**: Downloads to `ComfyUI/models/adcsr/`
+2. **SD2.1 Model**: Downloads to `ComfyUI/models/diffusers/stable-diffusion-2-1-base/`
 
-## 使用方法
+## Usage
 
 ### 1. AdcSR Model Loader
 
-自动加载 AdcSR 模型，无需手动配置。
+Automatically loads the AdcSR model without manual configuration.
 
-**输入**: 无
-**输出**: `ADCSR_MODEL` - 加载的模型对象
+**Input**: None
+**Output**: `ADCSR_MODEL` - Loaded model object
 
 ### 2. AdcSR Upscaler
 
-对图像进行超分辨率处理。
+Performs super-resolution processing on images.
 
-**输入**:
-- `image`: 输入图像
-- `adcsr_model`: AdcSR 模型对象
-- `scale_factor`: 缩放因子 (2 或 4)
-- `tile_size`: 分块大小 (默认: 640)
-- `overlap`: 重叠像素 (默认: 32)
+**Input**:
+- `image`: Input image
+- `adcsr_model`: AdcSR model object
+- `scale_factor`: Scale factor (2 or 4)
+- `tile_size`: Tile size (default: 640)
+- `overlap`: Overlap pixels (default: 32)
 
-**输出**:
-- `image`: 超分辨率处理后的图像
+**Output**:
+- `image`: Super-resolution processed image
 
-## 安装要求
+## Installation Requirements
 
 ```bash
 pip install torch torchvision diffusers transformers huggingface_hub tqdm
 ```
 
-## 注意事项
+## Important Notes
 
-1. **首次使用**: 首次运行时会自动下载必要的模型文件
-2. **网络要求**: 需要稳定的网络连接以下载模型
-3. **存储空间**: 确保有足够的磁盘空间存储模型文件 (总计约 7GB)
-4. **内存使用**: 处理大图像时注意内存使用情况
-5. **模型位置**: 
-   - AdcSR 模型保存在 `models/adcsr/` 目录
-   - SD2.1 模型保存在 `models/diffusers/` 目录
+1. **First Use**: Required model files will be automatically downloaded on first run
+2. **Network Requirements**: Stable internet connection required for model downloads
+3. **Storage Space**: Ensure sufficient disk space for model files (approximately 7GB total)
+4. **Memory Usage**: Pay attention to memory usage when processing large images
+5. **Model Locations**: 
+   - AdcSR models saved in `models/adcsr/` directory
+   - SD2.1 models saved in `models/diffusers/` directory
 
-## 技术细节
+## Technical Details
 
-- 基于 AdcSR 论文实现
-- 支持 2x 和 4x 超分辨率
-- 使用分块处理避免内存溢出
-- 集成 Stable Diffusion 2.1 作为基础模型
+- Implementation based on AdcSR paper
+- Supports 2x and 4x super-resolution
+- Uses tiling processing to avoid memory overflow
+- Integrates Stable Diffusion 2.1 as base model
 
-## 引用
+## Citation
 
-如果您使用了此实现，请引用原始论文：
+If you use this implementation, please cite the original paper:
 
 ```bibtex
 @inproceedings{chen2025adversarial,
@@ -115,3 +115,15 @@ pip install torch torchvision diffusers transformers huggingface_hub tqdm
   year={2025}
 }
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/flybirdxx/ComfyUI_AdcSR).
