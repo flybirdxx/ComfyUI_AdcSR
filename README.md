@@ -23,6 +23,14 @@ git clone https://github.com/flybirdxx/ComfyUI_AdcSR.git
 - **Efficient Processing**: Supports image super-resolution processing
 - **Memory Optimization**: Memory optimization for large images
 
+## Effect Comparison Demo
+
+
+![AdcSR Super-Resolution Effect](assets/20250915_181243.gif)
+
+*上图展示了 AdcSR 模型在图像超分辨率处理中的效果对比，可以看到 AdcSR 相比传统方法在细节保持和图像质量方面有显著提升。*
+
+
 ## Required Models to Download
 
 ```
